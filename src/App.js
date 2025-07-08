@@ -1,30 +1,47 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import NavBar        from "./components/layout/NavBar";
+import Protected     from "./components/layout/Protected";
+import LoginPage     from "./features/auth/LoginPage";
+import PatientsPage  from "./features/patients/PatientsPage";
+import DashBoard     from "./features/dashboard/DashBoard";
+import CalendarView  from "./features/calendar/CalendarView";
+import PatientPortal from "./features/patient/PatientPortal";
+import IncidentsPage from "./features/incidents/IncidentsPage";
 
-import LoginPage from './components/LoginPage';
-import PatientPortal from './components/PatientPortal';
-import IncidentManager from './components/IncidentManager';
-import Dashboard from './components/DashBoard';
-import CalendarView from './components/CalendarView';
-import { IncidentProvider } from './components/IncidentContext';
+export default function App(){
+  const user = useSelector(s=>s.auth.user);
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-
-function App() {
   return (
-    <IncidentProvider>
-      <div className="container py-4">
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/portal" element={<PatientPortal />} />
-          <Route path="/incident-manager" element={<IncidentManager />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/calendar" element={<CalendarView />} />
-        </Routes>
-      </div>
-    </IncidentProvider>
+    <Routes>
+      <Route path="/login" element={<LoginPage/>}/>
+      {/* shared shell */}
+      <Route path="/*" element={
+        <Protected>
+          <NavBar/>
+          <Routes>
+            {user?.role==="Admin" && (
+              <>
+                <Route path="/"          element={<PatientsPage/>}/>
+                <Route path="incidents"               element={<IncidentsPage/>}/>
++                <Route path="incidents/:patientId"    element={<IncidentsPage/>}/>
+                <Route path="dashboard"  element={<DashBoard/>}/>
+                <Route path="calendar"   element={<CalendarView/>}/>
+                <Route path="*"          element={<Navigate to="/" />} />
+              </>
+            )}
+            {user?.role==="Patient" && (
+              <Route path="*" element={<Navigate to="/portal" />} />
+            )}
+          </Routes>
+        </Protected>
+      }/>
+      {/* patient portal */}
+      <Route path="/portal" element={
+        <Protected>
+          <NavBar/><PatientPortal/>
+        </Protected>
+      }/>
+    </Routes>
   );
 }
-
-export default App;
