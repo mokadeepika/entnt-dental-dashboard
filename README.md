@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# 🦷 ENTNT Dental Center Management Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fully responsive frontend dashboard built with **React**, **Redux Toolkit**, **TailwindCSS**, and **localStorage** for ENTNT's dental center simulation. Supports both Admin (Dentist) and Patient roles.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📦 Tech Stack
 
-### `npm start`
+- **React** (CRA - Create React App)
+- **Redux Toolkit** (with Thunks)
+- **React Router v6**
+- **TailwindCSS**
+- **Jest** for unit testing
+- **localStorage** for data persistence
+- **No backend or external API used**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 👥 User Roles
 
-### `npm test`
+- **Admin** (`admin@entnt.in` / `admin123`)
+  - Full access: Patients, Incidents, Calendar, Dashboard
+- **Patient** (`john@entnt.in` / `patient123`)
+  - View-only access: their own appointments, treatment history & uploads
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ✨ Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ✅ Authentication (Simulated)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Hardcoded users with session stored in localStorage
+- Role-based frontend routing with protected views
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🧑‍⚕️ Patient Management (Admin Only)
 
-### `npm run eject`
+- View, Add, Edit, Delete patients
+- Includes DOB, contact info, and health info
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 📅 Appointment / Incident Management (Admin Only)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Per-patient incidents
+- Fields: title, description, comments, datetime, cost, status, file uploads
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📆 Calendar View (Admin Only)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- View all upcoming appointments monthly
+- Click any day to view scheduled incidents
 
-## Learn More
+### 📊 Dashboard (Admin)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Summary of top patients, revenue, and next appointments
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🙋‍♂️ Patient Portal (Patient Only)
 
-### Code Splitting
+- View only their appointments and treatment files
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 💾 Local Storage Simulation
 
-### Analyzing the Bundle Size
+- All users, patients, and incidents stored via localStorage
+- Files saved as base64 strings
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧰 Setup & Run
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Install dependencies:
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install
+npm start
+```
